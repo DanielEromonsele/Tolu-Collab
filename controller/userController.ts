@@ -18,3 +18,54 @@ export const createUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const viewUser = async (req: Request, res: Response) => {
+  try {
+    const user = await userModel.find();
+
+    return res.status(201).json({
+      msg: "Viewing users",
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      msg: "Error creating",
+    });
+  }
+};
+export const viewOneUser = async (req: Request, res: Response) => {
+  try {
+    const { userID } = req.body;
+
+    const user = await userModel.findById(userID);
+
+    return res.status(201).json({
+      msg: "Viewing users",
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      msg: "Error creating",
+    });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { userID } = req.body;
+
+    const user = await userModel.findByIdAndDelete(userID);
+
+    return res.status(200).json({
+      msg: "Deleteing user",
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      msg: "Error creating",
+    });
+  }
+};
