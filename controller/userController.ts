@@ -18,3 +18,19 @@ export const createUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const viewUser = async (req: Request, res: Response) => {
+  try {
+    const user = await userModel.find();
+
+    return res.status(201).json({
+      msg: "User created",
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      msg: "Error creating",
+    });
+  }
+};
