@@ -1,28 +1,9 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 
 const URL: string = "mongodb://127.0.0.1:27017";
 
-export const client = new MongoClient(URL);
-
-const mainConnection = async () => {
-  try {
-    await client.connect();
-
-    return "database is now connected....🚀🚀";
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-mainConnection()
-  .then((res) => {
-    console.log(res);
-  })
-  .catch(() => {
-    console.error();
-  })
-  .finally(() => {
-    client.close();
+export const dbConfig = async () => {
+  await mongoose.connect(URL).then(() => {
+    console.log("database is connected...✔✔");
   });
-
-export const db = client.db("ToluClassDB").collection("books");
+};

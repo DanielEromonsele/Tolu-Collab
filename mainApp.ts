@@ -1,8 +1,9 @@
 import express, { Application, Request, Response } from "express"
+import router from "./router/userRouter"
 
 
 export const mainApp = (app: Application)=>{
-    app.use("/api/v1/")
+    app.use("/api/v1/", router)
     try {
         app.get("/", (req: Request, res: Response)=>{
             try {
